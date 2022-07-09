@@ -9,15 +9,23 @@ async function main() {
         database: "apitest"
     });
 
-    const conn = await database.createConnnection();
-    const result = await conn.getRes("select * from client;");
+    //error handling because of using await
+    let conn, result;
+    try {
+        conn = await database.createConnnection();
+        result = await conn.getRes("select * from client;");
+    } catch (err) {
+        throw "Database err: " + err;
+    }
 
+    //creating app
     const app = new App(1000, (req, res) => {
         console.log("a request has been performed");
 
         const bearer = req.headers["authorization"];
         const verification = app.verify(bearer, "elhalili");
 
+        //rooting
         if(!verification.isVerified || verification.payload.name !== "amine") {
             res.statusCode = 403;
             res.end("Forbidden !");
@@ -37,6 +45,7 @@ async function main() {
         }
     });
 
+    //running app
     app.run((err) => {
         if(err) throw "App " + err;
         else console.log("Done"); 

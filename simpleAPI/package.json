@@ -1,0 +1,16 @@
+{
+  "name": "simpleapi",
+  "version": "1.0.0",
+  "description": "simple api for learning",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "amine el halili",
+  "license": "ISC",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.19"
+  }
+}
